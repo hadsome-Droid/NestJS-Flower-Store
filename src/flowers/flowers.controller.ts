@@ -1,14 +1,26 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, UseGuards } from '@nestjs/common';
 import { FlowersService } from './flowers.service';
-import { ParseIntPipe } from '../conception/parseInt.pipe';
+import { AuthGuard } from '../conception/guard';
 
 @Controller('flowers')
 export class FlowersController {
   constructor(private readonly flowersService: FlowersService) {}
 
   @Get()
-  findAll(@Query('pageNumber', ParseIntPipe) pageNumber: number) {
-    console.log(pageNumber);
+  @UseGuards(AuthGuard)
+  findAll() {
     return this.flowersService.findAll();
   }
 }
+
+// PIPE
+// @Controller('flowers')
+// export class FlowersController {
+//   constructor(private readonly flowersService: FlowersService) {}
+//
+//   @Get()
+//   findAll(@Query('pageNumber', ParseIntPipe) pageNumber: number) {
+//     console.log(pageNumber);
+//     return this.flowersService.findAll();
+//   }
+// }
