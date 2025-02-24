@@ -1,6 +1,15 @@
-import { Controller, Get, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  UseGuards,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
 import { FlowersService } from './flowers.service';
 import { AuthGuard } from '../conception/guard';
+import { CreateFlowersDto } from './dto/flowers.dto';
 
 @Controller('flowers')
 export class FlowersController {
@@ -10,6 +19,13 @@ export class FlowersController {
   @UseGuards(AuthGuard)
   findAll() {
     return this.flowersService.findAll();
+  }
+
+  @Post()
+  @UsePipes(new ValidationPipe())
+  @UseGuards(AuthGuard)
+  create(@Body() dto: CreateFlowersDto) {
+    return this.flowersService.create(dto);
   }
 }
 
