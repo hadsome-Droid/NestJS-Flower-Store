@@ -10,6 +10,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
 import { FlowersGraphqlModule } from './flowers-graphql/flowers-graphql.module';
+import { WebsocketGateway } from './websocket.gateway';
 
 @Module({
   imports: [
@@ -35,7 +36,7 @@ import { FlowersGraphqlModule } from './flowers-graphql/flowers-graphql.module';
     FlowersGraphqlModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, WebsocketGateway],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
