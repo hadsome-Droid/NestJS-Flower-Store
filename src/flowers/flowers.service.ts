@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma.service';
 import { CreateFlowersDto } from './dto/flowers.dto';
 import { ConfigService } from '@nestjs/config';
-import { EnumAppMode } from '../type';
+
 
 @Injectable()
 export class FlowersService {
