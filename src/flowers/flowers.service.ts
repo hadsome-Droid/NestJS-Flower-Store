@@ -3,7 +3,6 @@ import { PrismaService } from '../prisma.service';
 import { CreateFlowersDto } from './dto/flowers.dto';
 import { ConfigService } from '@nestjs/config';
 
-
 @Injectable()
 export class FlowersService {
   constructor(
