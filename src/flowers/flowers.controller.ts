@@ -10,8 +10,10 @@ import {
 import { FlowersService } from './flowers.service';
 import { AuthGuard } from '../conception/guard';
 import { CreateFlowersDto } from './dto/flowers.dto';
+import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @Controller('flowers')
+@ApiTags('Flowers')
 export class FlowersController {
   constructor(private readonly flowersService: FlowersService) {}
 
@@ -24,6 +26,11 @@ export class FlowersController {
   @Post()
   @UsePipes(new ValidationPipe())
   @UseGuards(AuthGuard)
+  @ApiResponse({ status: 201, description: 'Successfully created' })
+  @ApiBody({
+    type: CreateFlowersDto,
+    description: 'Create a new flower',
+  })
   create(@Body() dto: CreateFlowersDto) {
     return this.flowersService.create(dto);
   }
